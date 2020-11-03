@@ -31,11 +31,11 @@ router.post('/',[auth, [
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const{name, email, phone, type} = req.body;
+    const{name, phone, type} = req.body;
     try{
         const newContact = new Contact({
             name: name, 
-            email: email,
+           // email: email,
             phone: phone,
             type: type,
             user: req.user.id
@@ -63,7 +63,7 @@ router.put('/:id',auth, async (req, res)=> {
     if(type) contactFields.type = type;
 
     try{
-        console.log(req.params.id);
+        //console.log(req.params.id);
         let contact = await Contact.findById(req.params.id);
         if(!contact){
             return res.status(404).json({msg: 'Contact not found'});
